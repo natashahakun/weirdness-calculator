@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, Header, Search } from './components';
+import PropTypes from 'prop-types';
+import { Card, Header, Result, Search } from './components';
+import { connect } from 'react-redux';
 
-function App() {
+function App({ hasResult }) {
 	return (
 		<div className="app">
 			<Header children="Weirdness Calculator" />
@@ -12,8 +14,22 @@ function App() {
 
 				<Search />
 			</Card> 
+
+			{ hasResult && <Result /> }
 		</div>
 	);
 }
 
-export default App;
+App.defaultProps = {
+	hasResult: null
+}
+
+App.propTypes = {
+	hasResult: PropTypes.string || null
+}
+
+const mapStateToProps = ({ result }) => ({
+	hasResult: result.url
+});
+
+export default connect(mapStateToProps)(App);

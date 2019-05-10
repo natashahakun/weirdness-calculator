@@ -3,5 +3,6 @@ export * from './Card/Card';
 export * from './Gif/Gif';
 export * from './Header/Header';
 export * from './Input/Input';
+export * from './Result/Result';
 export * from './Search/Search';
 export * from './Title/Title';
