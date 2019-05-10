@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Header, Result, Search } from './components';
+import { Card, Header, Liked, Result, Search } from './components';
 import { WeirdnessLayout } from './layouts';
 import { connect } from 'react-redux';
 
@@ -20,6 +20,9 @@ function App({ hasResult }) {
 				}
 				bottom={
 					hasResult && <Result />
+				}
+				panel={
+					<Liked />
 				}
 			/>
 		</div>
