@@ -6,7 +6,9 @@ export const GET_RESULT_REQUEST = 'GET_RESULT_REQUEST';
 export const GET_RESULT_SUCCESS = 'GET_RESULT_SUCCESS';
 export const GET_RESULT_FAILURE = 'GET_RESULT_FAILURE';
 
-const fetchResult = async (searchTerm) => await giphyClient.translate('gifs', {"s": 'hamburger' });
+export const CLEAR_RESULT = 'CLEAR_RESULT';
+
+const fetchResult = async (searchTerm) => await giphyClient.translate('gifs', {"s": searchTerm });
 
 export const getResult = (searchTerm) => async dispatch => {
 	dispatch({ type: GET_RESULT_REQUEST })
@@ -27,3 +29,7 @@ export const getResult = (searchTerm) => async dispatch => {
 		})
 	}
 };
+
+export const clearResult = () => dispatch => {
+    dispatch({ type: CLEAR_RESULT })
+}

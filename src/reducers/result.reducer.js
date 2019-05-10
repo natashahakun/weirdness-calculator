@@ -21,7 +21,11 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				loading: false,
 				...action.payload
-			}
+            }
+        case 'CLEAR_RESULT':
+            return {
+                ...INITIAL_STATE
+            }
 		default:
 			return state;
 	}

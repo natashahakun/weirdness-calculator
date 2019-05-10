@@ -4,36 +4,38 @@ import { Button, Input } from '../../components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getResult } from '../../actions/result.actions'
+import { updateSearchTerm } from '../../actions/search.actions';
 import './Search.scss';
 
-class SearchClass extends React.Component {
-    state = {
-        searchTerm: ''
+const SearchSFC = ({ getResult, searchTerm, updateSearchTerm }) => {
+    const submitResult = event => {
+        event.preventDefault();
+        getResult(searchTerm);
     }
 
-    render() {
-        return (
-            <form onSubmit={this.submitResult} className="search">
-                <Input label="Search term" id="search" value={this.state.searchTerm} onChange={event => this.setState({searchTerm: event.target.value})} />
-                <div className="search__action">
-                    <Button type="submit">Search</Button>
-                </div>
-            </form>
-        )
-    }
-
-    submitResult = event => {
-        event.preventDefault()
-        this.props.getResult(this.state.searchTerm)
-    }
+    return (
+        <form onSubmit={submitResult} className="search">
+            <Input label="Search term" id="search" value={searchTerm} onChange={event => updateSearchTerm(event.target.value)} />
+            <div className="search__action">
+                <Button type="submit">Search</Button>
+            </div>
+        </form>
+    )
 }  
 
-SearchClass.propTypes = {
-    getResult: PropTypes.func
+SearchSFC.propTypes = {
+    getResult: PropTypes.func,
+    searchTerm: PropTypes.string,
+    updateSearchTerm: PropTypes.func
 }
 
+const mapStateToProps = ({ search }) => ({
+    searchTerm: search.term
+})
+
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-	getResult
+    getResult,
+    updateSearchTerm
 }, dispatch);
 
-export const Search = connect(null, mapDispatchToProps)(SearchClass);
+export const Search = connect(mapStateToProps, mapDispatchToProps)(SearchSFC);

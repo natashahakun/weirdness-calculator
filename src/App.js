@@ -19,7 +19,7 @@ function App({ hasResult, liked }) {
 					</Card>
 				}
 				bottom={
-					hasResult && <Result />
+					hasResult ? <Result /> : <Card>Search for a new gif!</Card>
 				}
 				panel={
 					<Card>
