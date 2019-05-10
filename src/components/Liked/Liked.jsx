@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Gif, Title } from '../../components';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { removeLiked } from '../../actions/liked.actions';
 import './Liked.scss';
 
 const LikedSFC = ({ liked, removeLiked }) =>
@@ -12,7 +14,7 @@ const LikedSFC = ({ liked, removeLiked }) =>
             <div className="liked__gifs">{ liked.map((liked) => {
                 return (
                     <div key={liked.url}>
-                        <Gif title={liked.title} url={liked.url} />
+                        <Gif removeFunc={() => removeLiked(liked)} title={liked.title} url={liked.url} />
                     </div>
                 )
              } ) }</div>
@@ -25,11 +27,16 @@ LikedSFC.propTypes = {
         title: PropTypes.string,
         url: PropTypes.string
         })
-    )
+    ),
+    removeLiked: PropTypes.func
 }
 
 const mapStateToProps = ({ liked }) => ({
     liked
 });
 
-export const Liked = connect(mapStateToProps)(LikedSFC);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    removeLiked
+}, dispatch);
+
+export const Liked = connect(mapStateToProps, mapDispatchToProps)(LikedSFC);
