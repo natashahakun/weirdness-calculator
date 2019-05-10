@@ -3,7 +3,11 @@
 
     &__main {
         display: flex;
-        flex: 0 1 60%;
-        flex-direction: column
+        flex-direction: column;
+        width: 60%;
+    }
+
+    &__panel {
+        width: 40%;
     }
 }
