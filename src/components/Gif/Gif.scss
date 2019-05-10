@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.gif {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &__heading {
+        color: $gray;
+        text-transform: capitalize;
+    }
+
+    &__image {
+        border-radius: 6px;
+    }
+}
