@@ -1,25 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Gif, Title } from '../../components';
+import { Gif, Title } from '../../components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { removeLiked } from '../../actions/liked.actions';
 import './Liked.scss';
 
 const LikedSFC = ({ liked, removeLiked }) =>
-    <Card>
-        <div className="liked">
-            <Title>Your liked gifs</Title>
+    <div className="liked">
+        <Title>Your liked gifs</Title>
 
-            <div className="liked__gifs">{ liked.map((liked) => {
-                return (
-                    <div key={liked.url}>
-                        <Gif removeFunc={() => removeLiked(liked)} title={liked.title} url={liked.url} />
-                    </div>
-                )
-             } ) }</div>
-        </div>
-    </Card>
+        <div className="liked__gifs">{ liked.map((liked) => {
+            return (
+                <div className="liked__gif" key={liked.url}>
+                    <Gif removeFunc={() => removeLiked(liked)} title={liked.title} url={liked.url} />
+                </div>
+            )
+            } ) }</div>
+    </div>
 
 LikedSFC.propTypes = {
     liked: PropTypes.arrayOf(

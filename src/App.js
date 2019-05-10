@@ -4,7 +4,7 @@ import { Card, Header, Liked, Result, Search } from './components';
 import { WeirdnessLayout } from './layouts';
 import { connect } from 'react-redux';
 
-function App({ hasResult }) {
+function App({ hasResult, liked }) {
 	return (
 		<div className="app">
 			<Header children="Weirdness Calculator" />
@@ -22,7 +22,9 @@ function App({ hasResult }) {
 					hasResult && <Result />
 				}
 				panel={
-					<Liked />
+					<Card>
+						<Liked />
+					</Card>
 				}
 			/>
 		</div>
@@ -34,11 +36,18 @@ App.defaultProps = {
 }
 
 App.propTypes = {
-	hasResult: PropTypes.string || null
+	hasResult: PropTypes.string || null,
+	liked: PropTypes.arrayOf(
+        PropTypes.shape({
+        title: PropTypes.string,
+        url: PropTypes.string
+        })
+    )
 }
 
-const mapStateToProps = ({ result }) => ({
-	hasResult: result.url
+const mapStateToProps = ({ liked, result }) => ({
+	hasResult: result.url,
+	liked
 });
 
 export default connect(mapStateToProps)(App);
