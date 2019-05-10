@@ -1,0 +1,9 @@
+.weirdness-layout {
+    display: flex;
+
+    &__main {
+        display: flex;
+        flex: 0 1 60%;
+        flex-direction: column
+    }
+}
