@@ -13,6 +13,10 @@
     transition: all 0.15s ease-in;
     cursor: pointer;
 
+    &--hidden {
+        display: none;
+    }
+
     &--icon {
         min-width: unset;
         width: 25px;
