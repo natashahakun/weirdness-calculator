@@ -4,6 +4,7 @@ import { clearSearch } from './search.actions';
 
 const ADD_LIKED = 'ADD_LIKED';
 const REMOVE_LIKED = 'REMOVE_LIKED';
+const CLEAR_LIKED = 'CLEAR_LIKED';
 
 export const addLiked = result => (dispatch, getState) => {
     const { liked } = getState();
@@ -20,4 +21,8 @@ export const addLiked = result => (dispatch, getState) => {
 
 export const removeLiked = result => dispatch => {
     dispatch({ type: REMOVE_LIKED, payload: result });
+}
+
+export const clearLiked = () => dispatch => {
+    dispatch({ type: CLEAR_LIKED });
 }

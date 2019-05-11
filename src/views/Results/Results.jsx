@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import PropTypes from 'prop-types';
 import { Button, Card, Gif } from '../../components';
+import { bindActionCreators } from 'redux';
+import { clearLiked } from '../../actions/liked.actions';
 import { connect } from 'react-redux';
 import './Results.scss';
 
-const ResultsView = ({ avgWeirdness, liked }) =>
+const ResultsView = ({ avgWeirdness, clearLiked, liked }) =>
     <Card className="results">
         { liked.length > 0 ?
             <div className="results-wrapper">
@@ -23,20 +26,27 @@ const ResultsView = ({ avgWeirdness, liked }) =>
                 </div>
 
                 <div className="results__action">
-                    <Button>Start over</Button>
+                    <Button onClick={() => clearLiked()}>Start over</Button>
                 </div>
             </div>
             :
-            <div className="results-not-found">
-                <p>No Results found</p>
-                <Link to="/">Start Over</Link>
-            </div>
+            <Redirect to="/" />
         }
     </Card>
+
+ResultsView.propTypes = {
+    avgWeirdness: PropTypes.number,
+    clearLiked: PropTypes.func,
+    liked: PropTypes.array
+}
 
 const mapStateToProps = ({ liked }) => ({
     liked,
     avgWeirdness: Math.round(liked.map((likedItem) => likedItem.weirdness).reduce((accumulator, num) => accumulator + num, 0) / liked.length)
 });
 
-export default connect(mapStateToProps)(ResultsView);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    clearLiked
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsView);
