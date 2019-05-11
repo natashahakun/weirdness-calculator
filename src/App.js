@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Error, Header, Liked, Result, Search, Slider } from './components';
+import { Button, Card, Error, Header, Liked, Result, Search, Slider } from './components';
 import { WeirdnessLayout } from './layouts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { updateWeirdness } from './actions/search.actions';
 
-function App({ error, hasResult, updateWeirdness, weirdness }) {
+function App({ error, hasResult, numLiked, updateWeirdness, weirdness }) {
 	return (
 		<div className="app">
 			{ error && <Error>{ error }</Error> }
@@ -34,6 +34,16 @@ function App({ error, hasResult, updateWeirdness, weirdness }) {
 				panel={
 					<Card>
 						<Liked />
+
+                        { numLiked !== 0 &&
+                            <div>
+                                <Button disabled={numLiked < 5} onClick={() => {}} type="button">Calculate my weirdness score</Button>
+
+                                { numLiked < 5 &&
+                                    <p>You must <i>Like</i> { 5 - numLiked } more GIF to calculate your score</p>
+                                }
+                            </div>
+                        }
 					</Card>
 				}
 			/>
@@ -47,19 +57,15 @@ App.defaultProps = {
 
 App.propTypes = {
 	hasResult: PropTypes.string || null,
-	liked: PropTypes.arrayOf(
-        PropTypes.shape({
-        title: PropTypes.string,
-        url: PropTypes.string
-        })
-    ),
+	numLiked: PropTypes.number,
     updateWeirdness: PropTypes.func,
     weirdness: PropTypes.number
 }
 
-const mapStateToProps = ({ error, result, search }) => ({
-	error: error.message,
+const mapStateToProps = ({ error, liked, result, search }) => ({
+    error: error.message,
     hasResult: result.url,
+    numLiked: liked.length,
     weirdness: search.weirdness
 });
 

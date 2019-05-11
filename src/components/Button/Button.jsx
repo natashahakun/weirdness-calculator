@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './Button.scss';
 
-export const Button = ({ buttonType, children, disabled, hidden, icon, type, ...props }) =>
-    <button className={classNames('button', { 'button--secondary': buttonType === 'secondary', 'button--icon': buttonType === 'icon', 'button--hidden': hidden })} disabled={disabled} type={type} {...props}>{ children }</button>
+export const Button = ({ buttonType, children, disabled, icon, type, ...props }) =>
+    <button className={classNames('button', { 'button--secondary': buttonType === 'secondary', 'button--icon': buttonType === 'icon' })} disabled={disabled} type={type} {...props}>{ children }</button>
 
 Button.defaultProps = {
     buttonType: 'primary',
     disabled: false,
-    hidden: false,
     icon: '',
     type: 'button'
 };
@@ -22,7 +21,6 @@ Button.propTypes = {
         PropTypes.string
     ]).isRequired,
     disabled: PropTypes.bool,
-    hidden: PropTypes.bool,
     icon: PropTypes.string,
     type: PropTypes.string
 };
