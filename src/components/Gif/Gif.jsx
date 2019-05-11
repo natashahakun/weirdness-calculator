@@ -19,7 +19,7 @@ export const Gif = ({ removeFunc, showWeirdness, title, url, weirdness }) =>
             }
         </div>
 
-        { showWeirdness && <p>{ weirdness }/10</p> }
+        { showWeirdness && <p className="gif__weirdness">{ weirdness }/10</p> }
     </div>
 
 Gif.defaultProps = {
@@ -30,7 +30,7 @@ Gif.defaultProps = {
 Gif.propTypes = {
     removeFunc: PropTypes.func || null,
     showWeirdness: PropTypes.bool,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string || null,
     url: PropTypes.string.isRequired,
     weirdness: PropTypes.number
 };

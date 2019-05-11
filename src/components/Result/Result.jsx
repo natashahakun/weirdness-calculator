@@ -19,7 +19,7 @@ const ResultSFC = ({ addLiked, searchTerm, title, url, weirdness }) =>
 
 ResultSFC.propTypes = {
     addLiked: PropTypes.func,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string || null,
     url: PropTypes.string.isRequired,
     weirdness: PropTypes.number.isRequired
 };
