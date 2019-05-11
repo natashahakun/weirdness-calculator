@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './WeirdnessLayout.scss';
 
 export const WeirdnessLayout = ({ top, bottom, panel }) =>
@@ -9,3 +10,18 @@ export const WeirdnessLayout = ({ top, bottom, panel }) =>
         </div>
         <div className="weirdness-layout__panel">{ panel }</div>
     </div>
+
+WeirdnessLayout.propTypes = {
+	top: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element
+    ]),
+	bottom: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element
+    ]),
+    panel: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element
+    ])
+}
