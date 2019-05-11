@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from '../../components';
 import './Gif.scss';
 
-export const Gif = ({ removeFunc, title, url }) =>
+export const Gif = ({ removeFunc, showWeirdness, title, url, weirdness }) =>
     <div className="gif">
         <h3 className="gif__heading">{ title }</h3>
 
@@ -18,14 +18,19 @@ export const Gif = ({ removeFunc, title, url }) =>
                 </div>
             }
         </div>
+
+        { showWeirdness && <p>{ weirdness }/10</p> }
     </div>
 
 Gif.defaultProps = {
-    removeFunc: null
+    removeFunc: null,
+    showWeirdness: false
 }
 
 Gif.propTypes = {
     removeFunc: PropTypes.func || null,
+    showWeirdness: PropTypes.bool,
     title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+    url: PropTypes.string.isRequired,
+    weirdness: PropTypes.number
 };
