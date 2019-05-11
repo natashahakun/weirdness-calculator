@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Card, Liked, Loader, Result, Search, Slider } from '../../components';
 import { WeirdnessLayout } from '../../layouts';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
 import { setWeirdness } from '../../actions/search.actions';
 import './Search.scss';
 
-const SearchView = ({ hasResult, loading, numLiked, setWeirdness, weirdness }) =>
+const SearchView = ({ hasResult, loading, numLiked, setWeirdness, weirdness, history }) =>
     <div className="search-view">
         <WeirdnessLayout
             top={
@@ -36,12 +36,9 @@ const SearchView = ({ hasResult, loading, numLiked, setWeirdness, weirdness }) =
             panel={
                 <Card>
                     <Liked />
-
                     { numLiked !== 0 &&
                         <div className="search-view__action">
-                            <Link to="/results">
-                                <Button disabled={loading || numLiked < 5} onClick={() => {}}>Calculate my weirdness score</Button>
-                            </Link>
+                            <Button disabled={loading || numLiked < 5} onClick={() => history.push('/results')}>Calculate my weirdness score</Button>
 
                             { numLiked < 5 &&
                                 <p className="search-view__text">You must <i>Like</i> { 5 - numLiked } more GIF to calculate your score</p>
@@ -78,4 +75,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     setWeirdness
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchView);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(SearchView);
