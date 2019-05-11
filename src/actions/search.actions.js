@@ -1,13 +1,13 @@
 import { getResult } from './result.actions';
 
-const UPDATE_SEARCH_TERM = 'UPDATE_SEARCH_TERM';
-const UPDATE_WEIRDNESS = 'UPDATE_WEIRDNESS';
+const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
+const SET_WEIRDNESS = 'SET_WEIRDNESS';
 
-export const updateSearchTerm = (term) => dispatch => {
-    dispatch({ type: UPDATE_SEARCH_TERM, payload: term });
+export const setSearchTerm = (term) => dispatch => {
+    dispatch({ type: SET_SEARCH_TERM, payload: term });
 }
 
-export const updateWeirdness = (weirdness) => dispatch => {
-    dispatch({ type: UPDATE_WEIRDNESS, payload: parseInt(weirdness)});
+export const setWeirdness = (weirdness) => dispatch => {
+    dispatch({ type: SET_WEIRDNESS, payload: parseInt(weirdness)});
     dispatch(getResult());
 }

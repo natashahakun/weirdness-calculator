@@ -5,10 +5,10 @@ import { Button, Card, Liked, Result, Search, Slider } from '../../components';
 import { WeirdnessLayout } from '../../layouts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateWeirdness } from '../../actions/search.actions';
+import { setWeirdness } from '../../actions/search.actions';
 import './Search.scss';
 
-const SearchView = ({ hasResult, numLiked, updateWeirdness, weirdness }) => 
+const SearchView = ({ hasResult, numLiked, setWeirdness, weirdness }) => 
     <div className="search-view">
         <WeirdnessLayout
             top={
@@ -26,7 +26,7 @@ const SearchView = ({ hasResult, numLiked, updateWeirdness, weirdness }) =>
                     <Card>
                         <Result />
 
-                        <Slider id="slider" label="Weirdness" value={weirdness} onChange={(event) => updateWeirdness(event.target.value)} />
+                        <Slider id="slider" label="Weirdness" value={weirdness} onChange={(event) => setWeirdness(event.target.value)} />
                     </Card>
                 :
                     <Card>Search for a new gif!</Card>
@@ -59,7 +59,7 @@ SearchView.defaultProps = {
 SearchView.propTypes = {
 	hasResult: PropTypes.string || null,
 	numLiked: PropTypes.number,
-    updateWeirdness: PropTypes.func,
+    setWeirdness: PropTypes.func,
     weirdness: PropTypes.number
 }
 
@@ -70,7 +70,7 @@ const mapStateToProps = ({ liked, result, search }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    updateWeirdness
+    setWeirdness
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchView);

@@ -5,12 +5,12 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case 'UPDATE_SEARCH_TERM':
+		case 'SET_SEARCH_TERM':
 			return {
 				...state,
 				term: action.payload
             }
-        case 'UPDATE_WEIRDNESS':
+        case 'SET_WEIRDNESS':
 			return {
 				...state,
 				weirdness: action.payload

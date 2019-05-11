@@ -4,10 +4,10 @@ import { Button, Input } from '../../components';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getResult } from '../../actions/result.actions'
-import { updateSearchTerm } from '../../actions/search.actions';
+import { setSearchTerm } from '../../actions/search.actions';
 import './Search.scss';
 
-const SearchSFC = ({ getResult, searchTerm, updateSearchTerm }) => {
+const SearchSFC = ({ getResult, searchTerm, setSearchTerm }) => {
     const submitResult = event => {
         event.preventDefault();
         getResult();
@@ -15,7 +15,7 @@ const SearchSFC = ({ getResult, searchTerm, updateSearchTerm }) => {
 
     return (
         <form onSubmit={submitResult} className="search">
-            <Input label="Search term" id="search" value={searchTerm} onChange={event => updateSearchTerm(event.target.value)} />
+            <Input label="Search term" id="search" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} />
             <div className="search__action">
                 <Button type="submit">Search</Button>
             </div>
@@ -26,7 +26,7 @@ const SearchSFC = ({ getResult, searchTerm, updateSearchTerm }) => {
 SearchSFC.propTypes = {
     getResult: PropTypes.func,
     searchTerm: PropTypes.string,
-    updateSearchTerm: PropTypes.func
+    setSearchTerm: PropTypes.func
 }
 
 const mapStateToProps = ({ search }) => ({
@@ -35,7 +35,7 @@ const mapStateToProps = ({ search }) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getResult,
-    updateSearchTerm
+    setSearchTerm
 }, dispatch);
 
 export const Search = connect(mapStateToProps, mapDispatchToProps)(SearchSFC);

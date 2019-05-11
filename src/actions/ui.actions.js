@@ -1,6 +1,6 @@
-const UPDATE_ERROR = 'UPDATE_ERROR';
+const SET_ERROR = 'SET_ERROR';
 
-export const updateError = (error) => dispatch => {
-    dispatch({ type: UPDATE_ERROR, payload: error })
-    setTimeout(() => dispatch({ type: UPDATE_ERROR, payload: '' }), 5000)
+export const setError = (error) => dispatch => {
+    dispatch({ type: SET_ERROR, payload: error })
+    setTimeout(() => dispatch({ type: SET_ERROR, payload: '' }), 5000)
 }
