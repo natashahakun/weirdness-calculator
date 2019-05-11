@@ -6,6 +6,7 @@ import { WeirdnessLayout } from '../../layouts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { updateWeirdness } from '../../actions/search.actions';
+import './Search.scss';
 
 const SearchView = ({ hasResult, numLiked, updateWeirdness, weirdness }) => 
     <div className="search-view">
@@ -15,7 +16,9 @@ const SearchView = ({ hasResult, numLiked, updateWeirdness, weirdness }) =>
                     <p>Find out how weird you are by selecting the GIFs that make you laugh. We’ll show you the least weird ones to start, but you can move the slider to make them weirder.</p>
                     <p>When you find a GIF you like, press the Like button. Once you like 5 GIFs, we’ll show you how weird you are.</p>
 
-                    <Search />
+                    <div className="search-view__search">
+                        <Search />
+                    </div>
                 </Card>
             }
             bottom={
@@ -33,13 +36,13 @@ const SearchView = ({ hasResult, numLiked, updateWeirdness, weirdness }) =>
                     <Liked />
 
                     { numLiked !== 0 &&
-                        <div>
+                        <div className="search-view__action">
                             <Link to="/results">
                                 <Button disabled={numLiked < 5} onClick={() => {}} type="button">Calculate my weirdness score</Button>
                             </Link>
 
                             { numLiked < 5 &&
-                                <p>You must <i>Like</i> { 5 - numLiked } more GIF to calculate your score</p>
+                                <p className="search-view__text">You must <i>Like</i> { 5 - numLiked } more GIF to calculate your score</p>
                             }
                         </div>
                     }
