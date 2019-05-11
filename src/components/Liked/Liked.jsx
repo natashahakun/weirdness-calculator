@@ -13,10 +13,10 @@ const LikedSFC = ({ liked, removeLiked }) =>
         <div className="liked__gifs">{ liked.map((liked) => {
             return (
                 <div className="liked__gif" key={liked.url}>
-                    <Gif removeFunc={() => removeLiked(liked)} title={liked.title} url={liked.url} />
+                    <Gif removeFunc={() => removeLiked(liked)} {...liked} />
                 </div>
             )
-            } ) }</div>
+        })}</div>
     </div>
 
 LikedSFC.propTypes = {

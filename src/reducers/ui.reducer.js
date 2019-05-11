@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-    message: ''
+    error: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -7,7 +7,7 @@ export default (state = INITIAL_STATE, action) => {
 		case 'UPDATE_ERROR':
 			return {
 				...state,
-				message: action.payload
+				error: action.payload
             }
 		default:
 			return state;

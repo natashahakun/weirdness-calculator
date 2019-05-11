@@ -62,8 +62,8 @@ App.propTypes = {
     weirdness: PropTypes.number
 }
 
-const mapStateToProps = ({ error, liked, result, search }) => ({
-    error: error.message,
+const mapStateToProps = ({ liked, result, search, ui }) => ({
+    error: ui.error,
     hasResult: result.url,
     numLiked: liked.length,
     weirdness: search.weirdness
