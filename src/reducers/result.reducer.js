@@ -7,20 +7,16 @@ export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case 'GET_RESULT_REQUEST':
 			return {
-				...state,
-				loading: true
+				...state
 			}
 		case 'GET_RESULT_SUCCESS':
 			return {
 				...state,
-				loading: false,
 				...action.payload
 			}
 		case 'GET_RESULT_FAILURE':
 			return {
-				...state,
-				loading: false,
-				...action.payload
+				...state
             }
         case 'CLEAR_RESULT':
             return {

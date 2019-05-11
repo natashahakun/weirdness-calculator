@@ -15,6 +15,10 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				weirdness: action.payload
         }
+        case 'CLEAR_SEARCH':
+            return {
+                ...INITIAL_STATE
+            }
 		default:
 			return state;
 	}

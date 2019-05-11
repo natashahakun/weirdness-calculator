@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
-    error: ''
+    error: '',
+    loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -8,6 +9,11 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				error: action.payload
+            }
+        case 'SET_LOADING':
+            return {
+                ...state,
+                loading: action.payload
             }
 		default:
 			return state;
