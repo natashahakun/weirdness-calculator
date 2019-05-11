@@ -7,6 +7,10 @@ export const Error = ({ children }) =>
         <p className="error__message">{ children }</p>
     </div>
 
+Error.defaultProps = {
+    children: 'Error'
+}
+
 Error.propTypes = {
     children: PropTypes.string
 }

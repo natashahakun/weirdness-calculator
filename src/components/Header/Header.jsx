@@ -7,6 +7,6 @@ export const Header = ({ children }) =>
         <h1 className="header__heading">{ children }</h1>
     </header>
 
-Error.propTypes = {
-    children: PropTypes.string
+Header.propTypes = {
+    children: PropTypes.string.isRequired
 }
