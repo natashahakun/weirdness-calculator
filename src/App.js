@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Header, Liked, Result, Search } from './components';
+import { Card, Error, Header, Liked, Result, Search } from './components';
 import { WeirdnessLayout } from './layouts';
 import { connect } from 'react-redux';
 
-function App({ hasResult, liked }) {
+function App({ error, hasResult }) {
 	return (
 		<div className="app">
+			{ error && <Error>{ error }</Error> }
 			<Header children="Weirdness Calculator" />
 
 			<WeirdnessLayout
@@ -45,9 +46,9 @@ App.propTypes = {
     )
 }
 
-const mapStateToProps = ({ liked, result }) => ({
-	hasResult: result.url,
-	liked
+const mapStateToProps = ({ error, result }) => ({
+	error: error.message,
+	hasResult: result.url
 });
 
 export default connect(mapStateToProps)(App);

@@ -9,10 +9,7 @@ export const Input = ({ id, label, name, ...inputProps }) =>
 	</div>
 
 Input.propTypes = {
-    id: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.string
-	]).isRequired,
+    id: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	name: PropTypes.string
 };

@@ -1,4 +1,5 @@
 import { clearResult } from './result.actions';
+import { updateError } from './error.actions';
 import { updateSearchTerm } from './search.actions';
 
 const ADD_LIKED = 'ADD_LIKED';
@@ -9,7 +10,7 @@ export const addLiked = (result) => (dispatch, getState) => {
     const isExistingSearchTerm = liked.find(likedItem => likedItem.searchTerm === result.searchTerm);
 
     if (isExistingSearchTerm) {
-        window.alert('Each liked gif must have a different search term.');
+        dispatch(updateError('Each liked gif must have a different search term.'));
     } else {
         dispatch({ type: ADD_LIKED, payload: result });
         dispatch(updateSearchTerm(''));
