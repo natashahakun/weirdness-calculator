@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { addLiked } from '../../actions/liked.actions';
 import './Result.scss';
 
-const ResultSFC = ({ addLiked, title, url }) =>
+const ResultSFC = ({ addLiked, searchTerm, title, url }) =>
     <Card>
         <div className="result">
             <Title>Your result</Title>
@@ -14,7 +14,7 @@ const ResultSFC = ({ addLiked, title, url }) =>
             <Gif title={title} url={url} />
 
             <div className="result__action">
-                <Button type="button" onClick={() => addLiked({ title, url })}>Like</Button>
+                <Button type="button" onClick={() => addLiked({ searchTerm, title, url })}>Like</Button>
             </div>
         </div>
     </Card>
@@ -25,7 +25,8 @@ ResultSFC.propTypes = {
     url: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({ result }) => ({
+const mapStateToProps = ({ result, search }) => ({
+    searchTerm: search.term,
     title: result.title,
     url: result.url
 });
