@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Error, Header, Liked, Result, Search } from './components';
+import { Card, Error, Header, Liked, Result, Search, Slider } from './components';
 import { WeirdnessLayout } from './layouts';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { updateWeirdness } from './actions/search.actions';
 
-function App({ error, hasResult }) {
+function App({ error, hasResult, updateWeirdness, weirdness }) {
 	return (
 		<div className="app">
 			{ error && <Error>{ error }</Error> }
@@ -20,7 +22,14 @@ function App({ error, hasResult }) {
 					</Card>
 				}
 				bottom={
-					hasResult ? <Result /> : <Card>Search for a new gif!</Card>
+                    hasResult ?
+                        <Card>
+                            <Result />
+
+                            <Slider id="slider" value={weirdness} onChange={(event) => updateWeirdness(event.target.value)} />
+                        </Card>
+                    :
+                        <Card>Search for a new gif!</Card>
 				}
 				panel={
 					<Card>
@@ -43,12 +52,19 @@ App.propTypes = {
         title: PropTypes.string,
         url: PropTypes.string
         })
-    )
+    ),
+    updateWeirdness: PropTypes.func,
+    weirdness: PropTypes.number
 }
 
-const mapStateToProps = ({ error, result }) => ({
+const mapStateToProps = ({ error, result, search }) => ({
 	error: error.message,
-	hasResult: result.url
+    hasResult: result.url,
+    weirdness: search.weirdness
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    updateWeirdness
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

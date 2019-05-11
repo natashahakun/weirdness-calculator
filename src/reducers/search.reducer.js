@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
-	term: ''
+    term: '',
+    weirdness: 0
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -8,7 +9,12 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				term: action.payload
-			}
+            }
+        case 'UPDATE_WEIRDNESS':
+			return {
+				...state,
+				weirdness: action.payload
+        }
 		default:
 			return state;
 	}

@@ -8,28 +8,31 @@ export const GET_RESULT_FAILURE = 'GET_RESULT_FAILURE';
 
 export const CLEAR_RESULT = 'CLEAR_RESULT';
 
-const fetchResult = async (searchTerm) => await giphyClient.translate('gifs', {"s": searchTerm });
+const fetchResult = async (searchTerm, weirdness) => await giphyClient.translate('gifs', {"s": searchTerm, weirdness });
 
-export const getResult = (searchTerm) => async dispatch => {
-	dispatch({ type: GET_RESULT_REQUEST })
+export const getResult = (searchTerm) => async (dispatch, getState) => {
+    const { search } = getState();
+
+	dispatch({ type: GET_RESULT_REQUEST });
 	try {
-		const result = await fetchResult(searchTerm);
+        const result = await fetchResult(searchTerm, search.weirdness);
+
 		return dispatch({ 
 			type: GET_RESULT_SUCCESS, 
 			payload: { 
-				title: result.data.title, 
-				url: result.data.images.original.url 
+				title: result.data.title,
+                url: result.data.images.original.url
 			} 
-		})
+		});
 	}
 	catch (error) {
 		return dispatch({ 
 			type: GET_RESULT_FAILURE,
 			payload: { error } 
-		})
+		});
 	}
 };
 
 export const clearResult = () => dispatch => {
-    dispatch({ type: CLEAR_RESULT })
+    dispatch({ type: CLEAR_RESULT });
 }
