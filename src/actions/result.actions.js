@@ -10,12 +10,12 @@ export const CLEAR_RESULT = 'CLEAR_RESULT';
 
 const fetchResult = async (searchTerm, weirdness) => await giphyClient.translate('gifs', {"s": searchTerm, weirdness });
 
-export const getResult = (searchTerm) => async (dispatch, getState) => {
+export const getResult = () => async (dispatch, getState) => {
     const { search } = getState();
 
 	dispatch({ type: GET_RESULT_REQUEST });
 	try {
-        const result = await fetchResult(searchTerm, search.weirdness);
+        const result = await fetchResult(search.term, search.weirdness);
 
 		return dispatch({ 
 			type: GET_RESULT_SUCCESS, 

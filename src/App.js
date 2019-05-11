@@ -26,7 +26,7 @@ function App({ error, hasResult, updateWeirdness, weirdness }) {
                         <Card>
                             <Result />
 
-                            <Slider id="slider" value={weirdness} onChange={(event) => updateWeirdness(event.target.value)} />
+                            <Slider id="slider" label="Weirdness" value={weirdness} onChange={(event) => updateWeirdness(event.target.value)} />
                         </Card>
                     :
                         <Card>Search for a new gif!</Card>

@@ -10,7 +10,7 @@ import './Search.scss';
 const SearchSFC = ({ getResult, searchTerm, updateSearchTerm }) => {
     const submitResult = event => {
         event.preventDefault();
-        getResult(searchTerm);
+        getResult();
     }
 
     return (

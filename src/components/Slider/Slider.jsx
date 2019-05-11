@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Slider.scss';
 
-export const Slider = ({ id, min, max, onChange, value }) =>
-    <input type="range" id={id} min={min} max={max} value={value} className="slider" onChange={onChange} />
+export const Slider = ({ id, label, min, max, onChange, value }) =>
+    <div className="slider">
+        <input className="slider__input" type="range" id={id} min={min} max={max} value={value} onChange={onChange} />
+        <label className="slider__label">{ label }: { value }</label>
+    </div>
 
 Slider.defaultProps = {
     min: 0,
@@ -12,6 +16,7 @@ Slider.defaultProps = {
 
 Slider.propTypes = {
     id: PropTypes.string.isRequired,
+    label: PropTypes.string,
     min: PropTypes.number,
     max: PropTypes.number,
     onChange: PropTypes.func.isRequired,
