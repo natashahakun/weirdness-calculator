@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Gif } from '../../components';
+import { Button, Card, Gif } from '../../components';
 import { connect } from 'react-redux';
 import './Results.scss';
 
-const ResultsView = ({ liked }) =>
-    <div className="results">
-        <h2>You scored X out of 10 on the weirdness scale!</h2>
+const ResultsView = ({ avgWeirdness, liked }) =>
+    <Card className="results">
+        <h2>You scored { avgWeirdness } out of 10 on the weirdness scale!</h2>
 
         <div className="results__main">
             <h3>The GIFs you liked</h3>
@@ -20,10 +20,11 @@ const ResultsView = ({ liked }) =>
         </div>
 
         <Button>Start over</Button>
-    </div>
+    </Card>
 
 const mapStateToProps = ({ liked }) => ({
-    liked
+    liked,
+    avgWeirdness: Math.round(liked.map((likedItem) => likedItem.weirdness).reduce((accumulator, num) => accumulator + num, 0) / liked.length)
 });
 
 export default connect(mapStateToProps)(ResultsView);
