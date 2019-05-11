@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
-import { Button, Card, Liked, Result, Search, Slider } from '../../components';
+import { Button, Card, Liked, Loader, Result, Search, Slider } from '../../components';
 import { WeirdnessLayout } from '../../layouts';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ const SearchView = ({ hasResult, loading, numLiked, setWeirdness, weirdness }) =
 
                     <div className="search-view__search">
                         <Search />
-                        { loading && <p>Loading...</p> }
+                        { loading && <Loader /> }
                     </div>
 
                 </Card>
@@ -40,7 +40,7 @@ const SearchView = ({ hasResult, loading, numLiked, setWeirdness, weirdness }) =
                     { numLiked !== 0 &&
                         <div className="search-view__action">
                             <Link to="/results">
-                                <Button disabled={loading || numLiked < 5} onClick={() => {}} type="button">Calculate my weirdness score</Button>
+                                <Button disabled={loading || numLiked < 5} onClick={() => {}}>Calculate my weirdness score</Button>
                             </Link>
 
                             { numLiked < 5 &&
