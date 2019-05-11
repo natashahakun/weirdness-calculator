@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { setWeirdness } from '../../actions/search.actions';
 import './Search.scss';
 
-const SearchView = ({ hasResult, numLiked, setWeirdness, weirdness }) => 
+const SearchView = ({ hasResult, loading, numLiked, setWeirdness, weirdness }) =>
     <div className="search-view">
         <WeirdnessLayout
             top={
@@ -18,7 +18,9 @@ const SearchView = ({ hasResult, numLiked, setWeirdness, weirdness }) =>
 
                     <div className="search-view__search">
                         <Search />
+                        { loading && <p>Loading...</p> }
                     </div>
+
                 </Card>
             }
             bottom={
@@ -26,7 +28,7 @@ const SearchView = ({ hasResult, numLiked, setWeirdness, weirdness }) =>
                     <Card>
                         <Result />
 
-                        <Slider id="slider" label="Weirdness" value={weirdness} onChange={(event) => setWeirdness(event.target.value)} />
+                        <Slider disabled={loading} id="slider" label="Weirdness" value={weirdness} onChange={(event) => setWeirdness(event.target.value)} />
                     </Card>
                 :
                     <Card>Search for a new gif!</Card>
@@ -38,7 +40,7 @@ const SearchView = ({ hasResult, numLiked, setWeirdness, weirdness }) =>
                     { numLiked !== 0 &&
                         <div className="search-view__action">
                             <Link to="/results">
-                                <Button disabled={numLiked < 5} onClick={() => {}} type="button">Calculate my weirdness score</Button>
+                                <Button disabled={loading || numLiked < 5} onClick={() => {}} type="button">Calculate my weirdness score</Button>
                             </Link>
 
                             { numLiked < 5 &&
@@ -53,18 +55,21 @@ const SearchView = ({ hasResult, numLiked, setWeirdness, weirdness }) =>
 
 
 SearchView.defaultProps = {
-	hasResult: null
+    hasResult: null,
+    loading: false
 }
 
 SearchView.propTypes = {
-	hasResult: PropTypes.string || null,
+    hasResult: PropTypes.string || null,
+    loading: PropTypes.bool,
 	numLiked: PropTypes.number,
     setWeirdness: PropTypes.func,
     weirdness: PropTypes.number
 }
 
-const mapStateToProps = ({ liked, result, search }) => ({
+const mapStateToProps = ({ liked, result, search, ui }) => ({
     hasResult: result.url,
+    loading: ui.loading,
     numLiked: liked.length,
     weirdness: search.weirdness
 });

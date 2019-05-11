@@ -7,7 +7,7 @@ import { getResult } from '../../actions/result.actions'
 import { setSearchTerm } from '../../actions/search.actions';
 import './Search.scss';
 
-const SearchSFC = ({ getResult, searchTerm, setSearchTerm }) => {
+const SearchSFC = ({ getResult, loading, searchTerm, setSearchTerm }) => {
     const submitResult = event => {
         event.preventDefault();
         getResult();
@@ -15,9 +15,9 @@ const SearchSFC = ({ getResult, searchTerm, setSearchTerm }) => {
 
     return (
         <form onSubmit={submitResult} className="search">
-            <Input label="Search term" id="search" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} />
+            <Input disabled={loading} label="Search term" id="search" value={searchTerm} onChange={event => setSearchTerm(event.target.value)} />
             <div className="search__action">
-                <Button type="submit">Search</Button>
+                <Button disabled={loading} type="submit">Search</Button>
             </div>
         </form>
     )
@@ -29,7 +29,8 @@ SearchSFC.propTypes = {
     setSearchTerm: PropTypes.func
 }
 
-const mapStateToProps = ({ search }) => ({
+const mapStateToProps = ({ search, ui }) => ({
+    loading: ui.loading,
     searchTerm: search.term
 })
 

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Slider.scss';
 
-export const Slider = ({ id, label, min, max, onChange, value }) =>
+export const Slider = ({ id, label, min, max, onChange, value, ...props }) =>
     <div className="slider">
-        <input className="slider__input" type="range" id={id} min={min} max={max} value={value} onChange={onChange} />
+        <input className="slider__input" type="range" id={id} min={min} max={max} value={value} onChange={onChange} {...props} />
         <label className="slider__label">{ label }: { value }</label>
     </div>
 
